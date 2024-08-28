@@ -1,15 +1,17 @@
 types = {list, tuple, set}
 
-def calculate_structure_sum(args):
+def calculate_structure_sum(*args):
     res = 0
     for i in args:
         if type(i) in types:
-            res += calculate_structure_sum(i)
+            res += calculate_structure_sum(*i)
         else:
             if isinstance(i, int) or isinstance(i, float):
                 res += i
+                continue
             if isinstance(i, str):
                 res += len(i)
+                continue
             if isinstance(i, dict):
                 for key,val in i.items():
                     if type(key) == int:
@@ -20,6 +22,7 @@ def calculate_structure_sum(args):
                         res += val
                     else:
                         res += len(val)
+                    continue
     return res
 
 
